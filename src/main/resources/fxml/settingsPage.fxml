@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SettingsPageController">
+   <children>
+      <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox fx:id="settingsPageSideBar" alignment="CENTER" prefHeight="400.0" prefWidth="39.0">
+                     <children>
+                        <VBox prefHeight="79.0" prefWidth="26.0" />
+                        <FontAwesomeIcon glyphName="HOME" onMouseClicked="#home" size="1.5em" />
+                        <VBox prefHeight="42.0" prefWidth="18.0" />
+                        <FontAwesomeIcon glyphName="SEARCH" onMouseClicked="#search" size="1.5em" />
+                        <VBox prefHeight="159.0" prefWidth="18.0" />
+                        <FontAwesomeIcon glyphName="GEAR" size="1.5em" />
+                        <VBox prefHeight="36.0" prefWidth="18.0" />
+                        <FontAwesomeIcon glyphName="SIGN_OUT" onMouseClicked="#signOut" size="1.5em" />
+                        <VBox prefHeight="47.0" prefWidth="18.0" />
+                     </children>
+                  </VBox>
+                  <VBox HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="582.0">
+                           <children>
+                              <HBox prefHeight="71.0" prefWidth="25.0" />
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label fx:id="settingsPageLabel1" alignment="CENTER" prefHeight="17.0" prefWidth="187.0" text="Account" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="39.0" prefWidth="193.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label fx:id="settingsPageLabel2" alignment="CENTER" prefHeight="17.0" prefWidth="249.0" text="Library System 2024" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="71.0" prefWidth="109.0" />
+                              <Circle fx:id="settingsPageIcon" fill="DODGERBLUE" radius="22.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" />
+                              <HBox prefHeight="71.0" prefWidth="22.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                           <children>
+                              <VBox prefHeight="329.0" prefWidth="23.0" />
+                              <VBox alignment="CENTER" prefHeight="329.0" prefWidth="351.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <VBox fx:id="settingsPageCard1Parent" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <HBox prefHeight="11.0" prefWidth="533.0" />
+                                          <VBox fx:id="settingsPageCard1" prefHeight="108.0" prefWidth="533.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="533.0">
+                                                   <children>
+                                                      <HBox maxWidth="50.0" minWidth="10.0" prefHeight="26.0" prefWidth="10.0" />
+                                                      <Label fx:id="settingsPageLabel3" prefHeight="17.0" prefWidth="427.0" text="Borrowed Books" HBox.hgrow="ALWAYS" />
+                                                      <HBox HBox.hgrow="ALWAYS" />
+                                                      <Label prefHeight="13.0" prefWidth="39.0" text="View all" HBox.hgrow="ALWAYS">
+                                                         <font>
+                                                            <Font name="System Bold" size="10.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <FontAwesomeIcon glyphName="ARROW_RIGHT" HBox.hgrow="ALWAYS" />
+                                                      <HBox prefHeight="35.0" prefWidth="21.0" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox prefHeight="9.0" prefWidth="533.0" />
+                                                <HBox fx:id="settingsPageCard2Parent" prefHeight="57.0" prefWidth="533.0">
+                                                   <children>
+                                                      <VBox minWidth="10.0" prefHeight="57.0" prefWidth="10.0" />
+                                                      <HBox fx:id="settingsPageCard2" prefHeight="57.0" prefWidth="137.0" HBox.hgrow="ALWAYS">
+                                                         <children>
+                                                            <VBox minWidth="5.0" prefHeight="57.0" prefWidth="13.0" HBox.hgrow="ALWAYS" />
+                                                            <VBox fx:id="settingsPageBox1" alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="144.0" HBox.hgrow="ALWAYS">
+                                                               <children>
+                                                                  <Label fx:id="settingsPageBookTitle1" prefHeight="17.0" prefWidth="293.0" text="Book Title 1" />
+                                                                  <Label prefHeight="28.0" prefWidth="69.0" text="Author: John Doe">
+                                                                     <font>
+                                                                        <Font size="9.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <HBox prefHeight="6.0" prefWidth="289.0" />
+                                                                  <Button fx:id="settingsPageReturnBtn1" mnemonicParsing="false" text="Return" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox alignment="CENTER" prefHeight="57.0" prefWidth="92.0">
+                                                               <children>
+                                                                  <ImageView fx:id="settingsPageImage1" fitHeight="62.0" fitWidth="91.0" pickOnBounds="true" preserveRatio="true" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                      <VBox prefHeight="57.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+                                                      <HBox fx:id="settingsPageCard3" prefHeight="57.0" prefWidth="139.0" HBox.hgrow="ALWAYS">
+                                                         <children>
+                                                            <VBox minWidth="10.0" prefHeight="57.0" prefWidth="10.0" />
+                                                            <VBox fx:id="settingsPageBox2" alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                               <children>
+                                                                  <Label fx:id="settingsPageBookTitle2" prefHeight="17.0" prefWidth="293.0" text="Book Title 1" />
+                                                                  <Label prefHeight="33.0" prefWidth="69.0" text="Author: John Doe">
+                                                                     <font>
+                                                                        <Font size="9.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <HBox prefHeight="6.0" prefWidth="289.0" />
+                                                                  <Button fx:id="settingsPageReturnBtn2" mnemonicParsing="false" text="Return" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                                                               <children>
+                                                                  <ImageView fx:id="settingsPageImage2" fitHeight="60.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                      <VBox prefHeight="57.0" prefWidth="15.0" HBox.hgrow="ALWAYS" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                          <VBox prefHeight="11.0" prefWidth="533.0" />
+                                          <HBox fx:id="settingsPageCard4" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <VBox prefHeight="100.0" prefWidth="15.0" />
+                                                <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <HBox fx:id="settingsPageEditParent" prefHeight="21.0" prefWidth="503.0">
+                                                         <children>
+                                                            <Label fx:id="settingsPageLabel4" prefHeight="17.0" prefWidth="438.0" text="Account Information" HBox.hgrow="ALWAYS" />
+                                                            <HBox fx:id="settingsPageEdit" alignment="CENTER" prefHeight="21.0" prefWidth="51.0">
+                                                               <children>
+                                                                  <Label text="Edit">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="12.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <HBox prefHeight="21.0" prefWidth="5.0" />
+                                                                  <FontAwesomeIcon glyphName="EDIT" size="1.2em" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox prefHeight="9.0" prefWidth="502.0" />
+                                                      <Label fx:id="settingsPageName" prefHeight="17.0" prefWidth="567.0" text="Name: John Doe">
+                                                         <font>
+                                                            <Font size="10.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="settingsPageEmail" prefHeight="17.0" prefWidth="567.0" text="Email: johndoe@gmail.com">
+                                                         <font>
+                                                            <Font size="10.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label prefHeight="17.0" prefWidth="567.0" text="Member since: Jan 25, 2024">
+                                                         <font>
+                                                            <Font size="10.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="100.0" prefWidth="15.0" />
+                                             </children>
+                                          </HBox>
+                                          <VBox prefHeight="11.0" prefWidth="533.0" />
+                                          <VBox fx:id="settingsPageCard5" prefHeight="108.0" prefWidth="533.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="533.0">
+                                                   <children>
+                                                      <HBox prefHeight="35.0" prefWidth="17.0" />
+                                                      <Label fx:id="settingsPageLabel5" prefHeight="17.0" prefWidth="570.0" text="Statistics" />
+                                                      <HBox prefHeight="35.0" prefWidth="21.0" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox prefHeight="9.0" prefWidth="533.0" />
+                                                <HBox alignment="CENTER" prefHeight="57.0" prefWidth="533.0" VBox.vgrow="ALWAYS">
+                                                   <children>
+                                                      <VBox minWidth="10.0" prefHeight="57.0" prefWidth="10.0" />
+                                                      <HBox fx:id="settingsPageCard6Parent" alignment="CENTER_LEFT" minWidth="164.66" HBox.hgrow="ALWAYS">
+                                                         <children>
+                                                            <VBox minWidth="4.0" prefHeight="57.0" prefWidth="4.0" />
+                                                            <VBox fx:id="settingsPageCard6" alignment="CENTER_LEFT" prefHeight="69.0" prefWidth="255.0" HBox.hgrow="ALWAYS">
+                                                               <children>
+                                                                  <Label prefHeight="17.0" prefWidth="293.0" text="Books Borrowed" />
+                                                                  <Label text="12">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="12.0" />
+                                                                     </font></Label>
+                                                                  <HBox prefHeight="6.0" prefWidth="289.0" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                      <VBox minWidth="10.0" prefHeight="57.0" prefWidth="10.0" />
+                                                      <HBox fx:id="settingsPageCard7Parent" alignment="CENTER_LEFT" minWidth="164.66" prefHeight="69.0" prefWidth="269.0" HBox.hgrow="ALWAYS">
+                                                         <children>
+                                                            <VBox minWidth="4.0" prefHeight="57.0" prefWidth="4.0" />
+                                                            <VBox fx:id="settingsPageCard7" alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                               <children>
+                                                                  <Label prefHeight="17.0" prefWidth="293.0" text="Books Returned" />
+                                                                  <Label text="10">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="12.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <HBox prefHeight="6.0" prefWidth="289.0" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                      <VBox minWidth="10.0" prefHeight="57.0" prefWidth="10.0" />
+                                                      <HBox fx:id="settingsPageCard8Parent" minWidth="164.66" HBox.hgrow="ALWAYS">
+                                                         <children>
+                                                            <VBox minWidth="4.0" prefHeight="57.0" prefWidth="4.0" />
+                                                            <VBox fx:id="settingsPageCard8" alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="249.0" HBox.hgrow="ALWAYS">
+                                                               <children>
+                                                                  <Label prefHeight="17.0" prefWidth="293.0" text="Next Return Date" />
+                                                                  <Label text="July 20, 2024">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="12.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <HBox prefHeight="6.0" prefWidth="289.0" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                      <VBox minWidth="10.0" prefHeight="57.0" prefWidth="10.0" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="329.0" prefWidth="15.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</HBox>

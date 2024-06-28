@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomePageController">
+   <children>
+      <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox fx:id="homePageSideBar" alignment="CENTER" prefHeight="400.0" prefWidth="39.0">
+                     <children>
+                        <VBox prefHeight="79.0" prefWidth="26.0" />
+                        <FontAwesomeIcon glyphName="HOME" size="1.5em" />
+                        <VBox prefHeight="42.0" prefWidth="18.0" />
+                        <FontAwesomeIcon glyphName="SEARCH" onMouseClicked="#search" size="1.5em" />
+                        <VBox prefHeight="159.0" prefWidth="18.0" />
+                        <FontAwesomeIcon glyphName="GEAR" onMouseClicked="#settings" size="1.5em" />
+                        <VBox prefHeight="36.0" prefWidth="18.0" />
+                        <FontAwesomeIcon glyphName="SIGN_OUT" onMouseClicked="#signOut" size="1.5em" />
+                        <VBox prefHeight="47.0" prefWidth="18.0" />
+                     </children>
+                  </VBox>
+                  <VBox HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="582.0">
+                           <children>
+                              <HBox prefHeight="71.0" prefWidth="25.0" />
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label fx:id="homePageLabel1" alignment="CENTER" prefHeight="17.0" prefWidth="187.0" text="Account" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="39.0" prefWidth="193.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label fx:id="homePageLabel2" alignment="CENTER" prefHeight="17.0" prefWidth="249.0" text="Library System 2024" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="71.0" prefWidth="109.0" />
+                              <Circle fx:id="homePageIcon" fill="DODGERBLUE" radius="22.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" />
+                              <HBox prefHeight="71.0" prefWidth="22.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="330.0" prefWidth="571.0">
+                           <children>
+                              <VBox prefHeight="330.0" prefWidth="26.0" />
+                              <VBox fx:id="homePageCalendarParent" prefHeight="330.0" prefWidth="244.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <HBox prefHeight="33.0" prefWidth="244.0" />
+                                    <HBox fx:id="homePageCalendar" alignment="TOP_CENTER" VBox.vgrow="ALWAYS" />
+                                    <HBox prefHeight="16.0" prefWidth="244.0" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="330.0" prefWidth="31.0" />
+                              <VBox fx:id="homePageChartParent" prefHeight="330.0" prefWidth="242.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <HBox prefHeight="33.0" prefWidth="242.0" />
+                                    <HBox fx:id="homePageChart" VBox.vgrow="ALWAYS" />
+                                    <HBox prefHeight="30.0" prefWidth="242.0" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="330.0" prefWidth="28.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</HBox>
