@@ -12,6 +12,9 @@ module com.library_system.librarysystem {
     requires com.almasb.fxgl.all;
     requires atlantafx.base;
     requires java.desktop;
+    requires java.sql;
+    requires de.mkammerer.argon2.nolibs;
+    requires com.sun.jna;
 
     opens com.library_system.librarysystem to javafx.fxml;
     exports com.library_system.librarysystem;
