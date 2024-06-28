@@ -2,27 +2,27 @@ package controllers;
 
 import atlantafx.base.controls.Card;
 import atlantafx.base.theme.Styles;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.ResourceBundle;
+
+import static util.Utility.nextScreenU;
+import static util.Utility.addStyleClassU;
+import static util.Utility.addImageU;
+import static util.Utility.styleButtonsU;
+import static util.Utility.styleSideBarU;
+import static util.Utility.createCardU;
 
 /**
  * The controller class for the settings screen
@@ -90,6 +90,10 @@ public class SettingsPageController implements Initializable {
     private Label settingsPageName;
     @FXML
     private Label settingsPageEmail;
+    @FXML
+    private VBox settingsPageBox1;
+    @FXML
+    private VBox settingsPageBox2;
 
     /**
      * Used to initialize a controller once the root Node has been created
@@ -101,43 +105,29 @@ public class SettingsPageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         // Add an image to the icon
-        Image image1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/general/man1.jpg")));
-        settingsPageIcon.setFill(new ImagePattern(image1));
+        addImageU(settingsPageIcon, getClass(), "general", "man1.jpg");
 
         // Add style to the sidebar
-        settingsPageSideBar.setStyle(
-                "-fx-background-color: #d2a7fa;" +
-                "-fx-background-radius: 15, 15, 0, 0"
-        );
+        styleSideBarU(settingsPageSideBar);
 
         // Add style to the labels
-        settingsPageLabel1.getStyleClass().addAll(Styles.TITLE_2);
-        settingsPageLabel2.getStyleClass().addAll(Styles.TITLE_2);
-        settingsPageLabel3.getStyleClass().addAll(Styles.TITLE_3);
-        settingsPageLabel4.getStyleClass().addAll(Styles.TITLE_3);
-        settingsPageLabel5.getStyleClass().addAll(Styles.TITLE_3);
-        settingsPageBookTitle1.getStyleClass().addAll(Styles.TEXT_CAPTION);
-        settingsPageBookTitle2.getStyleClass().addAll(Styles.TEXT_CAPTION);
+        addStyleClassU(Styles.TITLE_2, settingsPageLabel1, settingsPageLabel2);
+        addStyleClassU(Styles.TITLE_3, settingsPageLabel3, settingsPageLabel4, settingsPageLabel5);
+        addStyleClassU(Styles.TEXT_CAPTION, settingsPageBookTitle1, settingsPageBookTitle2);
 
         // Add style to the buttons
-        styleButtons(settingsPageReturnBtn1, settingsPageReturnBtn2);
+        styleButtonsU(true, settingsPageReturnBtn1, settingsPageReturnBtn2);
 
         // Create an array to hold the position of child Nodes in parent Nodes respectively
         int[] index = {1, 1, 3, 3, 5, 1, 1, 1, 1};
 
         // Create the Node arrays of child and parent
-        Node[] node1 = {settingsPageCard1, settingsPageCard1Parent};
-        Node[] node2 = {settingsPageCard2, settingsPageCard2Parent};
-        Node[] node3 = {settingsPageCard3, settingsPageCard2Parent};
-        Node[] node4 = {settingsPageCard4, settingsPageCard1Parent};
-        Node[] node5 = {settingsPageCard5, settingsPageCard1Parent};
-        Node[] node6 = {settingsPageCard6, settingsPageCard6Parent};
-        Node[] node7 = {settingsPageCard7, settingsPageCard7Parent};
-        Node[] node8 = {settingsPageCard8, settingsPageCard8Parent};
-        Node[] node9 = {settingsPageEdit, settingsPageEditParent};
+        Node[][] nodes = getNodes();
 
-        // Make the Cards
-        makeCards(index, node1, node2, node3, node4, node5, node6, node7, node8, node9);
+        // Loop through the Node array and make each Card
+        for (int i = 0; i < nodes.length; i++) {
+            createCardU(nodes[i][0], nodes[i][1], OptionalInt.of(index[i]));
+        }
 
         // Restrict the width of the Edit box
         settingsPageEditParent.setMaxWidth(500.0);
@@ -161,10 +151,12 @@ public class SettingsPageController implements Initializable {
         });
 
         // Add images to the ImageViews
-        Image image2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/general/man2.jpg")));
-        settingsPageImage1.setImage(image2);
-        Image image3 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/general/man2.jpg")));
-        settingsPageImage2.setImage(image3);
+        addImageU(settingsPageImage1, getClass(), "general", "man2.jpg");
+        addImageU(settingsPageImage2, getClass(), "general", "man2.jpg");
+
+        // Adjust minimum widths of the boxes
+        settingsPageBox1.setMinWidth(150.0);
+        settingsPageBox2.setMinWidth(150.0);
     }
 
     /**
@@ -176,11 +168,7 @@ public class SettingsPageController implements Initializable {
     @FXML
     public void signOut(MouseEvent event) throws IOException {
 
-        // Parse and load the fxml file of the first screen
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/firstPage.fxml"));
-
-        // Load next screen
-        nextScreen(fxmlLoader, event);
+        nextScreenU("firstPage.fxml", event, settingsPageIcon.getScene(), getClass());
     }
 
     /**
@@ -192,11 +180,7 @@ public class SettingsPageController implements Initializable {
     @FXML
     public void home(MouseEvent event) throws IOException {
 
-        // Parse and load the fxml file of the home screen
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/homePage.fxml"));
-
-        // Load next screen
-        nextScreen(fxmlLoader, event);
+        nextScreenU("homePage.fxml", event, settingsPageIcon.getScene(), getClass());
     }
 
     /**
@@ -208,82 +192,7 @@ public class SettingsPageController implements Initializable {
     @FXML
     public void search(MouseEvent event) throws IOException {
 
-        // Parse and load the fxml file of the search screen
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/searchPage.fxml"));
-
-        // Load next screen
-        nextScreen(fxmlLoader, event);
-    }
-
-    /**
-     * Makes multiple cards and adds them to parent Nodes
-     *
-     * @param index an array with positions in the parent Node to add the Card respectively
-     * @param nodes an unidentified number of Node arrays each having a child and parent Node
-     */
-    private void makeCards(int[] index, Node[]... nodes) {
-
-        // Loop through each Node
-        for (int i = 0; i < nodes.length; i++) {
-
-            // Make a card from the child Node using makeCard()
-            Card card = makeCard(nodes[i][0]);
-
-            // Check whether the parent Node is a VBox or not
-            if (nodes[i][1] instanceof VBox) {
-
-                // Create a VBox and replace the child with the Card
-                VBox parent = (VBox)nodes[i][1];
-                parent.getChildren().remove(nodes[i][0]);
-                parent.getChildren().add(index[i], card);
-                VBox.setVgrow(card, Priority.ALWAYS);
-            } else {
-
-                // Create an HBox and replace the child with the Card
-                HBox parent = (HBox)nodes[i][1];
-                parent.getChildren().remove(nodes[i][0]);
-                parent.getChildren().add(index[i], card);
-                HBox.setHgrow(card, Priority.ALWAYS);
-            }
-        }
-    }
-
-    /**
-     * Place a Node into a Card
-     *
-     * @param child the Node to place into a Card
-     * @return the Card
-     */
-    private Card makeCard(Node child) {
-
-        // Create and style a Card
-        Card card = new Card();
-        card.getStyleClass().addAll(Styles.INTERACTIVE);
-
-        // Place the Node into the Card
-        card.setBody(child);
-
-        return card;
-    }
-
-    /**
-     * Adds style to various buttons
-     *
-     * @param buttons an unidentified number of Button objects
-     */
-    private void styleButtons(Button... buttons) {
-
-        // Loop through each Button
-        for (Button button : buttons) {
-
-            // Add style to the Button
-            button.getStyleClass().addAll(Styles.ROUNDED, Styles.SMALL);
-            button.setPrefWidth(100);
-            button.setStyle(
-                    "-fx-background-color: #d2a7fa;" +
-                            "-fx-text-fill: white;" +
-                            "-fx-font-weight: bold");
-        }
+        nextScreenU("searchPage.fxml", event, settingsPageIcon.getScene(), getClass());
     }
 
     /**
@@ -354,29 +263,23 @@ public class SettingsPageController implements Initializable {
     }
 
     /**
-     * Takes the fxmlLoader and loads the next screen
+     * Creates a 2D array of the nodes and their parents
      *
-     * @param fxmlLoader loads the hierarchy
-     * @param event represents an action
-     * @throws IOException error during input/output operations
+     * @return the Nodes array
      */
-    private void nextScreen(FXMLLoader fxmlLoader, Event event) throws IOException {
+    private Node[][] getNodes() {
+        Node[] node1 = {settingsPageCard1, settingsPageCard1Parent};
+        Node[] node2 = {settingsPageCard2, settingsPageCard2Parent};
+        Node[] node3 = {settingsPageCard3, settingsPageCard2Parent};
+        Node[] node4 = {settingsPageCard4, settingsPageCard1Parent};
+        Node[] node5 = {settingsPageCard5, settingsPageCard1Parent};
+        Node[] node6 = {settingsPageCard6, settingsPageCard6Parent};
+        Node[] node7 = {settingsPageCard7, settingsPageCard7Parent};
+        Node[] node8 = {settingsPageCard8, settingsPageCard8Parent};
+        Node[] node9 = {settingsPageEdit, settingsPageEditParent};
 
-        // Create the root Node
-        Parent root = fxmlLoader.load();
-
-        // Pass the stage of the screen to the new stage variable
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        // Create a new scene with the dimensions of the previous one
-        Scene scene = new Scene(root, settingsPageIcon.getScene().getWidth(), settingsPageIcon.getScene().getHeight());
-
-        // Add css to the scene
-        String css = Objects.requireNonNull(getClass().getResource("/css/index.css")).toExternalForm();
-        scene.getStylesheets().add(css);
-
-        // Set up and display the new screen
-        stage.setScene(scene);
-        stage.show();
+        // Make an array of the Node arrays
+        return new Node[][]{node1, node2, node3, node4, node5, node6, node7, node8, node9};
     }
+
 }

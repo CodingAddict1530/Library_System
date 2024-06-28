@@ -2,34 +2,31 @@ package controllers;
 
 import atlantafx.base.controls.Card;
 import atlantafx.base.theme.Styles;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
+
+import static util.Utility.nextScreenU;
+import static util.Utility.addStyleClassU;
+import static util.Utility.addImageU;
+import static util.Utility.styleButtonsU;
+import static util.Utility.styleSideBarU;
 
 /**
  * The controller class for the search screen
@@ -73,24 +70,19 @@ public class SearchPageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         // Add an image to the icon
-        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/general/man1.jpg")));
-        searchPageIcon.setFill(new ImagePattern(image));
+        addImageU(searchPageIcon, getClass(), "general", "man1.jpg");
 
         // Add style to the sidebar
-        searchPageSideBar.setStyle(
-                "-fx-background-color: #d2a7fa;" +
-                "-fx-background-radius: 15, 15, 0, 0"
-        );
+        styleSideBarU(searchPageSideBar);
 
         // Add style to the labels
-        searchPageLabel1.getStyleClass().addAll(Styles.TITLE_2);
-        searchPageLabel2.getStyleClass().addAll(Styles.TITLE_2);
+        addStyleClassU(Styles.TITLE_2, searchPageLabel1, searchPageLabel2);
 
         // Add style to the search box
-        searchPageSearchBox.getStyleClass().addAll(Styles.ROUNDED);
+        addStyleClassU(searchPageSearchBox, Styles.ROUNDED);
 
         // Add style to the buttons
-        styleButtons(searchPageCategoryBtn1, searchPageCategoryBtn2, searchPageCategoryBtn3,
+        styleButtonsU(true, searchPageCategoryBtn1, searchPageCategoryBtn2, searchPageCategoryBtn3,
                 searchPageCategoryBtn4, searchPageCategoryBtn5, searchPageSearchBtn);
 
         // Set max width of the HBox in a ScrollPane to the maximum
@@ -114,11 +106,7 @@ public class SearchPageController implements Initializable {
     @FXML
     public void signOut(MouseEvent event) throws IOException {
 
-        // Parse and load the fxml file of the first screen
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/firstPage.fxml"));
-
-        // Load next screen
-        nextScreen(fxmlLoader, event);
+        nextScreenU("firstPage.fxml", event, searchPageIcon.getScene(), getClass());
     }
 
     /**
@@ -130,11 +118,7 @@ public class SearchPageController implements Initializable {
     @FXML
     public void home(MouseEvent event) throws IOException {
 
-        // Parse and load the fxml file of the home screen
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/homePage.fxml"));
-
-        // Load next screen
-        nextScreen(fxmlLoader, event);
+        nextScreenU("homePage.fxml", event, searchPageIcon.getScene(), getClass());
     }
 
     /**
@@ -146,31 +130,7 @@ public class SearchPageController implements Initializable {
     @FXML
     public void settings(MouseEvent event) throws IOException {
 
-        // Parse and load the fxml file of the settings screen
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/settingsPage.fxml"));
-
-        // Load next screen
-        nextScreen(fxmlLoader, event);
-    }
-
-    /**
-     * Adds style to multiple buttons
-     *
-     * @param buttons and unidentified number of Button objects
-     */
-    private void styleButtons(Button... buttons) {
-
-        // Loop through all buttons
-        for (Button button : buttons) {
-
-            // Add style to the buttons
-            button.getStyleClass().addAll(Styles.ROUNDED, Styles.SMALL);
-            button.setPrefWidth(100);
-            button.setStyle(
-                    "-fx-background-color: #d2a7fa;" +
-                    "-fx-text-fill: white;" +
-                    "-fx-font-weight: bold");
-        }
+        nextScreenU("settingsPage.fxml", event, searchPageIcon.getScene(), getClass());
     }
 
     /**
@@ -182,7 +142,7 @@ public class SearchPageController implements Initializable {
 
         // Create and style the card
         Card card = new Card();
-        card.getStyleClass().addAll(Styles.INTERACTIVE);
+        addStyleClassU(card, Styles.INTERACTIVE);
 
         // Add a VBox containing the book information using makeBookVbox()
         card.setBody(makeBookVbox(true));
@@ -212,8 +172,8 @@ public class SearchPageController implements Initializable {
         if (par1) {
 
             // Create an ImageView and style it
-            Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/general/man2.jpg")));
-            ImageView imageView = new ImageView(image);
+            ImageView imageView = new ImageView();
+            addImageU(imageView, getClass(), "general", "man2.jpg");
             imageView.setFitWidth(101.0);
             imageView.setFitHeight(90.0);
             imageView.setPreserveRatio(true);
@@ -261,30 +221,4 @@ public class SearchPageController implements Initializable {
         }
     }
 
-    /**
-     * Takes the fxmlLoader and loads the next screen
-     *
-     * @param fxmlLoader loads the hierarchy
-     * @param event represents an action
-     * @throws IOException error during input/output operations
-     */
-    private void nextScreen(FXMLLoader fxmlLoader, Event event) throws IOException {
-
-        // Create the root Node
-        Parent root = fxmlLoader.load();
-
-        // Pass the stage of the screen to the new stage variable
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        // Create a new scene with the dimensions of the previous one
-        Scene scene = new Scene(root, searchPageIcon.getScene().getWidth(), searchPageIcon.getScene().getHeight());
-
-        // Add css to the scene
-        String css = Objects.requireNonNull(getClass().getResource("/css/index.css")).toExternalForm();
-        scene.getStylesheets().add(css);
-
-        // Set up and display the new screen
-        stage.setScene(scene);
-        stage.show();
-    }
 }

@@ -3,37 +3,31 @@ package controllers;
 import atlantafx.base.controls.Calendar;
 import atlantafx.base.controls.Card;
 import atlantafx.base.theme.Styles;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
-import javafx.util.Duration;
+
+import util.Clock;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Objects;
+import java.util.OptionalInt;
 import java.util.ResourceBundle;
+
+import static util.Utility.nextScreenU;
+import static util.Utility.addStyleClassU;
+import static util.Utility.addImageU;
+import static util.Utility.styleSideBarU;
+import static util.Utility.swapNodesU;
 
 /**
  * The controller class for the home screen
@@ -69,18 +63,13 @@ public class HomePageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         // Add an image to the icon
-        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/general/man1.jpg")));
-        homePageIcon.setFill(new ImagePattern(image));
+        addImageU(homePageIcon, getClass(), "general", "man1.jpg");
 
         // Add style to the sidebar
-        homePageSideBar.setStyle(
-                "-fx-background-color: #d2a7fa;" +
-                "-fx-background-radius: 15, 15, 0, 0"
-        );
+        styleSideBarU(homePageSideBar);
 
         // Add style to the labels
-        homePageLabel1.getStyleClass().addAll(Styles.TITLE_2);
-        homePageLabel2.getStyleClass().addAll(Styles.TITLE_2);
+        addStyleClassU(Styles.TITLE_2, homePageLabel1, homePageLabel2);
 
         // Create a Calendar
         Calendar calendar = initializeCalendar();
@@ -89,9 +78,7 @@ public class HomePageController implements Initializable {
         Card card1 = new Card();
         card1.getStyleClass().addAll(Styles.INTERACTIVE);
         card1.setBody(calendar);
-        homePageCalendarParent.getChildren().remove(homePageCalendar);
-        homePageCalendarParent.getChildren().add(1, card1);
-        VBox.setVgrow(card1, Priority.ALWAYS);
+        swapNodesU(homePageCalendar, card1, homePageCalendarParent, true, OptionalInt.of(1));
 
         // Create a BarChart
         BarChart<String, Number> chart = initializeBarChart();
@@ -100,9 +87,7 @@ public class HomePageController implements Initializable {
         Card card2 = new Card();
         card2.getStyleClass().addAll(Styles.INTERACTIVE);
         card2.setBody(chart);
-        homePageChartParent.getChildren().remove(homePageChart);
-        homePageChartParent.getChildren().add(1, card2);
-        VBox.setVgrow(card2, Priority.ALWAYS);
+        swapNodesU(homePageChart, card2, homePageChartParent, true, OptionalInt.of(1));
     }
 
     /**
@@ -114,11 +99,7 @@ public class HomePageController implements Initializable {
     @FXML
     public void signOut(MouseEvent event) throws IOException {
 
-        // Parse and load the fxml file of the first screen
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/firstPage.fxml"));
-
-        // Load next screen
-        nextScreen(fxmlLoader, event);
+        nextScreenU("firstPage.fxml", event, homePageIcon.getScene(), getClass());
     }
 
     /**
@@ -130,11 +111,7 @@ public class HomePageController implements Initializable {
     @FXML
     public void search(MouseEvent event) throws IOException {
 
-        // Parse and load the fxml file of the search screen
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/searchPage.fxml"));
-
-        // Load next screen
-        nextScreen(fxmlLoader, event);
+        nextScreenU("searchPage.fxml", event, homePageIcon.getScene(), getClass());
     }
 
     /**
@@ -146,11 +123,7 @@ public class HomePageController implements Initializable {
     @FXML
     public void settings(MouseEvent event) throws IOException {
 
-        // Parse and load the fxml file of the settings screen
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/settingsPage.fxml"));
-
-        // Load next screen
-        nextScreen(fxmlLoader, event);
+        nextScreenU("settingsPage.fxml", event, homePageIcon.getScene(), getClass());
     }
 
     /**
@@ -159,46 +132,6 @@ public class HomePageController implements Initializable {
      * @return the calendar
      */
     private Calendar initializeCalendar() {
-
-        class Clock extends VBox {
-
-            // Initialize the formatters
-            static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("EEEE, LLLL dd, yyyy");
-            static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
-
-            /**
-             * Instantiates a Clock object
-             */
-            public Clock() {
-
-                // Set a label for the current time
-                Label clockLabel = new Label(TIME_FORMATTER.format(OffsetDateTime.now()));
-
-                // Add style to the label
-                clockLabel.getStyleClass().addAll(Styles.TITLE_2);
-
-                // Set a label for the current date
-                Label dateLabel = new Label(DATE_FORMATTER.format(OffsetDateTime.now()));
-
-                // Add style to the Clock object
-                setStyle("-fx-border-width: 0 0 0.5 0; -fx-border-color: -color-border-default;");
-                setSpacing(10);
-
-                // Add the labels to the Clock object
-                getChildren().setAll(clockLabel, dateLabel);
-
-                // Set up a Timeline to create the changing time animation
-                Timeline timeline = new Timeline(new KeyFrame(
-                        Duration.seconds(1),
-                        e -> {
-                            OffsetDateTime time = OffsetDateTime.now();
-                            clockLabel.setText(TIME_FORMATTER.format(time));
-                        }
-                ));
-                timeline.setCycleCount(Animation.INDEFINITE);
-                timeline.playFromStart();
-            }
-        }
 
         // Create a Calendar and add a Clock
         Calendar calendar = new Calendar(OffsetDateTime.now().toLocalDate());
@@ -220,62 +153,60 @@ public class HomePageController implements Initializable {
         NumberAxis yAxis = new NumberAxis(0, 80, 10);
         yAxis.setLabel("Number of Borrows");
 
-        // Set up April series and add data
-        XYChart.Series<String, Number> apr = new XYChart.Series<String, Number>();
-        apr.setName("April");
-        apr.getData().add(new XYChart.Data<>("Horror", 10));
-        apr.getData().add(new XYChart.Data<>("Comedy", 20));
-        apr.getData().add(new XYChart.Data<>("Romance", 60));
-        apr.getData().add(new XYChart.Data<>("Adventure", 20));
-
-        // Set up May series and add data
-        XYChart.Series<String, Number> may = new XYChart.Series<String, Number>();
-        may.setName("May");
-        may.getData().add(new XYChart.Data<>("Horror", 80));
-        may.getData().add(new XYChart.Data<>("Comedy", 20));
-        may.getData().add(new XYChart.Data<>("Romance", 10));
-        may.getData().add(new XYChart.Data<>("Adventure", 10));
-
-        // Set up June series and add data
-        XYChart.Series<String, Number> jun = new XYChart.Series<String, Number>();
-        jun.setName("June");
-        jun.getData().add(new XYChart.Data<>("Horror", 30));
-        jun.getData().add(new XYChart.Data<>("Comedy", 50));
-        jun.getData().add(new XYChart.Data<>("Romance", 40));
-        jun.getData().add(new XYChart.Data<>("Adventure", 70));
+        // Set up series and add data
+        XYChart.Series<String, Number>[] series = createSeries("April", "May", "June");
 
         // Create and set up the BarChart
         BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
         barChart.setTitle("Trending Books");
-        barChart.getData().addAll(apr, may, jun);
+
+        // Add each series to the Chart
+        for (XYChart.Series<String, Number> s : series) {
+            barChart.getData().add(s);
+        }
 
         return barChart;
     }
 
     /**
-     * Takes the fxmlLoader and loads the next screen
+     * Creates an undefined number of series according to how many series names provided
      *
-     * @param fxmlLoader loads the hierarchy
-     * @param event represents an action
-     * @throws IOException error during input/output operations
+     * @param seriesNames an array containing an undefined number of series names
+     * @return the array of series
      */
-    private void nextScreen(FXMLLoader fxmlLoader, Event event) throws IOException {
+    private XYChart.Series[] createSeries(String... seriesNames) {
 
-        // Create the root Node
-        Parent root = fxmlLoader.load();
+        // Create an array to store the series
+        XYChart.Series[] seriesArray = new XYChart.Series[seriesNames.length];
 
-        // Pass the stage of the screen to the new stage variable
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        // Loop through each series name
+        for (int i = 0; i < seriesNames.length; i++) {
 
-        // Create a new scene with the dimensions of the previous one
-        Scene scene = new Scene(root, homePageIcon.getScene().getWidth(), homePageIcon.getScene().getHeight());
+            // Create a new series and give it a name
+            XYChart.Series<String, Number> s = new XYChart.Series<String, Number>();
+            s.setName(seriesNames[i]);
 
-        // Add css to the scene
-        String css = Objects.requireNonNull(getClass().getResource("/css/index.css")).toExternalForm();
-        scene.getStylesheets().add(css);
+            // Add data to the series
+            addData(s);
 
-        // Set up and display the new screen
-        stage.setScene(scene);
-        stage.show();
+            // Add the series to the array
+            seriesArray[i] = s;
+        }
+
+        return seriesArray;
+    }
+
+    /**
+     * Adds data to a given series
+     *
+     * @param series the series to add data to
+     */
+    private void addData(XYChart.Series<String, Number> series) {
+
+        // Add data to the series
+        series.getData().add(new XYChart.Data<>("Horror", 10));
+        series.getData().add(new XYChart.Data<>("Comedy", 20));
+        series.getData().add(new XYChart.Data<>("Romance", 60));
+        series.getData().add(new XYChart.Data<>("Adventure", 20));
     }
 }

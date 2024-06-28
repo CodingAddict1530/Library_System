@@ -1,25 +1,22 @@
 package controllers;
 
-import atlantafx.base.controls.Card;
 import atlantafx.base.theme.Styles;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
+import java.util.OptionalInt;
 import java.util.ResourceBundle;
+
+import static util.Utility.nextScreenU;
+import static util.Utility.addStyleClassU;
+import static util.Utility.createCardU;
+import static util.Utility.styleButtonsU;
 
 /**
  * The controller class for the signUp screen
@@ -52,46 +49,28 @@ public class SignUpPageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         // Embody the signup form into a styled card
-        Card card = new Card();
-        card.getStyleClass().addAll(Styles.INTERACTIVE);
-        card.setBody(signUpPageContainer);
-        signUpPageParentContainer.getChildren().remove(signUpPageContainer);
-        signUpPageParentContainer.getChildren().add(1, card);
+        createCardU(signUpPageContainer, signUpPageParentContainer, OptionalInt.of(1));
 
         // Add style to the input fields
-        signUpPageEmail.getStyleClass().addAll(Styles.ROUNDED);
-        signUpPagePassword.getStyleClass().addAll(Styles.ROUNDED);
-        signUpPageFirstName.getStyleClass().addAll(Styles.ROUNDED);
-        signUpPageLastName.getStyleClass().addAll(Styles.ROUNDED);
+        addStyleClassU(Styles.ROUNDED, signUpPageEmail, signUpPagePassword, signUpPageFirstName, signUpPageLastName);
 
         // Add style to the button
-        signUpPageBtn.getStyleClass().addAll(Styles.ROUNDED, Styles.SMALL);
-        signUpPageBtn.setStyle(
-                "-fx-background-color: #d2a7fa;" +
-                        "-fx-text-fill: white;" +
-                        "-fx-font-weight: bold"
-        );
+        styleButtonsU(true, signUpPageBtn);
     }
 
     /**
      * Removes focus from to the input fields when the container is clicked
-     *
-     * @param event Represents an action, in this case the container being clicked
-     * @throws IOException error during input/output operations
      */
     @FXML
-    public void attentionContainer(MouseEvent event) throws IOException {
+    public void attentionContainer() {
         signUpPageContainer.requestFocus();
     }
 
     /**
      * Signs you up, currently does nothing
-     *
-     * @param event Represents an action, in this case signup button being clicked
-     * @throws IOException error during input/output operations
      */
     @FXML
-    public void signUp(ActionEvent event) throws IOException {
+    public void signUp(){
 
     }
 
@@ -104,37 +83,7 @@ public class SignUpPageController implements Initializable {
     @FXML
     public void login(MouseEvent event) throws IOException {
 
-        // Parse and load the fxml file of the login screen
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/loginPage.fxml"));
-
-        // Load next screen
-        nextScreen(fxmlLoader, event);
+        nextScreenU("loginPage.fxml", event, signUpPageBtn.getScene(), getClass());
     }
 
-    /**
-     * Takes the fxmlLoader and loads the next screen
-     *
-     * @param fxmlLoader loads the hierarchy
-     * @param event represents an action
-     * @throws IOException error during input/output operations
-     */
-    private void nextScreen(FXMLLoader fxmlLoader, Event event) throws IOException {
-
-        // Create the root Node
-        Parent root = fxmlLoader.load();
-
-        // Pass the stage of the screen to the new stage variable
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        // Create a new scene with the dimensions of the previous one
-        Scene scene = new Scene(root, signUpPageBtn.getScene().getWidth(), signUpPageBtn.getScene().getHeight());
-
-        // Add css to the scene
-        String css = Objects.requireNonNull(getClass().getResource("/css/index.css")).toExternalForm();
-        scene.getStylesheets().add(css);
-
-        // Set up and display the new screen
-        stage.setScene(scene);
-        stage.show();
-    }
 }
