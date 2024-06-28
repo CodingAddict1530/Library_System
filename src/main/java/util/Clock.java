@@ -13,11 +13,15 @@ import java.time.format.DateTimeFormatter;
 
 import static util.Utility.addStyleClassU;
 
+/**
+ * Used to create clock features
+ */
 public class Clock extends VBox {
 
     // Initialize the formatters
-    static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("EEEE, LLLL dd, yyyy");
-    static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("EEEE, LLLL dd, yyyy");
+    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
+    public static final DateTimeFormatter CUSTOM_FORMATTER = DateTimeFormatter.ofPattern("EEEE, MMM dd, yyyy HH:mm:ss OOOO");
 
     /**
      * Instantiates a Clock object
