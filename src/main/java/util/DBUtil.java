@@ -11,16 +11,18 @@ import de.mkammerer.argon2.Argon2Factory;
 
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.Objects;
 
 /**
  * Contains utility methods for database related operations
- * Compatible with MySQL and PostregSQL
+ * Compatible with MySQL, PostregSQL and SQLite
  */
 public class DBUtil {
 
     // JDBC URL, Set last part (db name) to your database name
     private static final String JDBC_URL_POSTGRES = "jdbc:postgresql://localhost:5432/Library_System";
     private static final String JDBC_URL_MYSQL = "jdbc:mysql://localhost:3306/Library_System";
+    private static final String JDBC_URL_SQLITE = "jdbc:sqlite:Library_System.db";
 
     // Set USER and PASSWORD to your user and password
     private static final String JDBC_USER = "login1";
@@ -52,7 +54,13 @@ public class DBUtil {
 
         // Check whether there is not already a connection
         if (conn == null || conn.isClosed()) {
-            conn = DriverManager.getConnection(jdbcUrl, JDBC_USER, JDBC_PASSWORD);
+
+            // Check whether it is SQLite
+            if (Objects.equals(jdbcUrl, JDBC_URL_SQLITE)) {
+                conn = DriverManager.getConnection(jdbcUrl);
+            } else {
+                conn = DriverManager.getConnection(jdbcUrl, JDBC_USER, JDBC_PASSWORD);
+            }
         }
     }
 
@@ -69,7 +77,7 @@ public class DBUtil {
         connect(url);
 
         // Last 2 parameters make the ResultSet scrollable
-        pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+        pstmt = conn.prepareStatement(sql, ResultSet.TYPE_FORWARD_ONLY,
                 ResultSet.CONCUR_READ_ONLY);
 
         // Set parameters, if any
