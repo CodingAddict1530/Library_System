@@ -130,14 +130,15 @@
                                           <HBox fx:id="settingsPageCard4" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                              <children>
                                                 <VBox prefHeight="100.0" prefWidth="15.0" />
-                                                <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                <VBox alignment="CENTER_LEFT" minWidth="100.0" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                                    <children>
                                                       <HBox fx:id="settingsPageEditParent" prefHeight="21.0" prefWidth="503.0">
                                                          <children>
-                                                            <Label fx:id="settingsPageLabel4" prefHeight="17.0" prefWidth="438.0" text="Account Information" HBox.hgrow="ALWAYS" />
-                                                            <HBox fx:id="settingsPageEdit" alignment="CENTER" prefHeight="21.0" prefWidth="51.0">
+                                                            <Label fx:id="settingsPageLabel4" prefHeight="17.0" prefWidth="500.0" text="Account Information" HBox.hgrow="ALWAYS" />
+                                                            <HBox prefHeight="21.0" prefWidth="292.0" />
+                                                            <HBox fx:id="settingsPageEdit1" alignment="CENTER" minWidth="57.0" HBox.hgrow="ALWAYS">
                                                                <children>
-                                                                  <Label text="Edit">
+                                                                  <Label text="Edit" HBox.hgrow="ALWAYS">
                                                                      <font>
                                                                         <Font name="System Bold" size="12.0" />
                                                                      </font>
@@ -146,6 +147,19 @@
                                                                   <FontAwesomeIcon glyphName="EDIT" size="1.2em" />
                                                                </children>
                                                             </HBox>
+                                                            <HBox minWidth="29.0" prefHeight="21.0" prefWidth="29.0" />
+                                                            <HBox fx:id="settingsPageEdit2" alignment="CENTER" minWidth="51.0" HBox.hgrow="ALWAYS">
+                                                               <children>
+                                                                  <Label prefWidth="400.0" text="Remove Profile" HBox.hgrow="ALWAYS">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="12.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <HBox prefHeight="21.0" prefWidth="5.0" />
+                                                                  <FontAwesomeIcon glyphName="EDIT" size="1.2em" />
+                                                               </children>
+                                                            </HBox>
+                                                            <HBox maxWidth="100.0" minWidth="10.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
                                                          </children>
                                                       </HBox>
                                                       <HBox prefHeight="9.0" prefWidth="502.0" />
@@ -159,7 +173,7 @@
                                                             <Font size="10.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label prefHeight="17.0" prefWidth="567.0" text="Member since: Jan 25, 2024">
+                                                      <Label fx:id="settingsPageMemberSince" prefHeight="17.0" prefWidth="567.0" text="Member since: Jan 25, 2024">
                                                          <font>
                                                             <Font size="10.0" />
                                                          </font>

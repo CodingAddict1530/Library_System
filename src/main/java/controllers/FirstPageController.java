@@ -16,11 +16,11 @@ import static util.Utility.nextScreenU;
 import static util.Utility.styleButtonsU;
 
 /**
- * The controller class for the first screen
+ * The controller class for the first screen.
  */
-public class FirstPageController implements Initializable {
+public class FirstPageController extends Controller implements Initializable {
 
-    // These represent Nodes in the scene of the first screen
+    // These represent Nodes in the scene of the first screen being used.
     @FXML
     private Label firstPageLabel1;
     @FXML
@@ -31,28 +31,28 @@ public class FirstPageController implements Initializable {
     private Button firstPageSignUpBtn;
 
     /**
-     * Used to initialize a controller once the root Node has been created
+     * Used to initialize a controller once the root Node has been created.
      *
-     * @param url Location used to make paths for the root Node
-     * @param resourceBundle Resources used to locate the root Node
+     * @param url Location used to make paths for the root Node.
+     * @param resourceBundle Resources used to locate the root Node.
      */
     @FXML
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        // Add style to the labels
+        // Add style to the labels.
         addStyleClassU(firstPageLabel1, Styles.TITLE_1);
         addStyleClassU(firstPageLabel2, Styles.TITLE_4);
 
-        // Add style to the buttons
+        // Add style to the buttons.
         styleButtonsU(false, firstPageLoginBtn, firstPageSignUpBtn);
     }
 
     /**
-     * Loads the login screen
+     * Loads the login screen.
      *
-     * @param event Represents an action, in this case login button being clicked
-     * @throws IOException error during input/output operations
+     * @param event Represents an action, in this case login button being clicked.
+     * @throws IOException error during input/output operations.
      */
     @FXML
     public void login(ActionEvent event) throws IOException {
@@ -61,10 +61,10 @@ public class FirstPageController implements Initializable {
     }
 
     /**
-     * Loads the signup screen
+     * Loads the signup screen.
      *
-     * @param event Represents an action, in this case signup button being clicked
-     * @throws IOException error during input/output operations
+     * @param event Represents an action, in this case signup button being clicked.
+     * @throws IOException error during input/output operations.
      */
     @FXML
     public void signUp(ActionEvent event) throws IOException {

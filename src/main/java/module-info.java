@@ -15,6 +15,7 @@ module com.library_system.librarysystem {
     requires java.sql;
     requires de.mkammerer.argon2.nolibs;
     requires com.sun.jna;
+    requires org.kordamp.ikonli.material2;
 
     opens com.library_system.librarysystem to javafx.fxml;
     exports com.library_system.librarysystem;

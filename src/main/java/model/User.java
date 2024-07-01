@@ -1,6 +1,6 @@
 package model;
 
-import abstract_model.Person;
+import abstractModel.Person;
 import util.Clock;
 
 import java.sql.ResultSet;
@@ -12,45 +12,45 @@ import static util.DBUtil.getPostreSQLURL;
 import static util.DBUtil.executeQuery;
 
 /**
- * Represents a database User Object
+ * Represents a database User Object.
  */
 public class User extends Person {
 
-    // The additional attributes of a User
+    // The additional attributes of a User.
     private String email;
     private boolean booking_record;
 
     /**
-     * Constructor for creating a new User from an existing user in the database
+     * Constructor for creating a new User from an existing user in the database.
      *
-     * @param id the id of the User
-     * @param first_name the first name of the User
-     * @param last_name the last name of the User
-     * @param email the email of the User
-     * @param booking_record the booking record of the User, true means good, false means not good
-     * @param date_added the date and time the User was added into the database
+     * @param id the id of the User.
+     * @param first_name the first name of the User.
+     * @param last_name the last name of the User.
+     * @param email the email of the User.
+     * @param booking_record the booking record of the User, true means good, false means not good.
+     * @param date_added the date and time the User was added into the database.
      */
     public User(int id, String first_name, String last_name, String email, boolean booking_record,
                 OffsetDateTime date_added) {
 
-        // Use super class constructor to create the id, first name, last name and date added attributes
+        // Use super class constructor to create the id, first name, last name and date added attributes.
         super(id, first_name, last_name, date_added);
 
-        // Create the remaining attributes
+        // Create the remaining attributes.
         this.email = email;
         this.booking_record = booking_record;
         this.date_added = date_added;
     }
 
     /**
-     * Constructor for creating a brand-new User
-     * Sets id to -1 indicating the User does not exist in the database
-     * Sets booking record to true by default
-     * Sets date added to null since the object has not been added yet
+     * Constructor for creating a brand-new User.
+     * Sets id to -1 indicating the User does not exist in the database.
+     * Sets booking record to true by default.
+     * Sets date added to null since the object has not been added yet.
      *
-     * @param first_name the first name of the User
-     * @param last_name the last name of the User
-     * @param email the email of the User
+     * @param first_name the first name of the User.
+     * @param last_name the last name of the User.
+     * @param email the email of the User.
      */
     public User(String first_name, String last_name, String email) {
 
@@ -58,9 +58,9 @@ public class User extends Person {
     }
 
     /**
-     * Retrieves the email of the User
+     * Retrieves the email of the User.
      *
-     * @return the email
+     * @return the email.
      */
     public String getEmail() {
 
@@ -68,9 +68,9 @@ public class User extends Person {
     }
 
     /**
-     * Updates the email of the User
+     * Updates the email of the User.
      *
-     * @param email the new email
+     * @param email the new email.
      */
     public void setEmail(String email) {
 
@@ -78,9 +78,9 @@ public class User extends Person {
     }
 
     /**
-     * Retrieves the booking record of the User
+     * Retrieves the booking record of the User.
      *
-     * @return the booking record
+     * @return the booking record.
      */
     public boolean getBooking_record() {
 
@@ -88,9 +88,9 @@ public class User extends Person {
     }
 
     /**
-     * Updates the booking record of the User
+     * Updates the booking record of the User.
      *
-     * @param booking_record the new booking record
+     * @param booking_record the new booking record.
      */
     public void setBooking_record(boolean booking_record) {
 
@@ -98,9 +98,9 @@ public class User extends Person {
     }
 
     /**
-     * Adds the User to the database
+     * Adds the User to the database.
      *
-     * @return the number of rows affected or the error message if any occurs
+     * @return the number of rows affected or the error message if any occurs.
      */
     @Override
     public String addToDatabase() {
@@ -142,14 +142,14 @@ public class User extends Person {
     }
 
     /**
-     * Save the changes made to the user in the database
+     * Save the changes made to the user in the database.
      *
-     * @return the number of rows affected or the error message if any occurs
+     * @return the number of rows affected or the error message if any occurs.
      */
     @Override
     public String saveChanges() {
 
-        // The SQL statement
+        // The SQL statement.
         String sql = "UPDATE public.users SET " +
                 "first_name = ?, " +
                 "last_name = ?, " +
@@ -158,7 +158,7 @@ public class User extends Person {
                 "WHERE user_id = ?";
         try {
 
-            // Use executeUpdate() method to save the changes in the database
+            // Use executeUpdate() method to save the changes in the database.
             return String.valueOf(executeUpdate(sql, getPostreSQLURL(), this.first_name,
                     this.last_name, this.booking_record, this.email, this.id));
 
@@ -168,19 +168,19 @@ public class User extends Person {
     }
 
     /**
-     * Delete the user from the database
+     * Delete the user from the database.
      *
-     * @return the number of rows affected or the error message if any occurs
+     * @return the number of rows affected or the error message if any occurs.
      */
     @Override
     public String delete() {
 
-        // The SQL statement
+        // The SQL statement.
         String sql = "DELETE FROM public.users WHERE user_id = ?";
 
         try {
 
-            // Use executeUpdate() method from DBUtil to delete the user from the database
+            // Use executeUpdate() method from DBUtil to delete the user from the database.
             return String.valueOf(executeUpdate(sql, getPostreSQLURL(), this.id));
 
         } catch (Exception ex) {
@@ -189,14 +189,14 @@ public class User extends Person {
     }
 
     /**
-     * Returns a string representation of the user
+     * Returns a string representation of the user.
      *
-     * @return a string representation of the user
+     * @return a string representation of the user.
      */
     @Override
     public String toString() {
 
-        // Use CUSTOM_FORMATTER To convert the date into a readable format
+        // Use CUSTOM_FORMATTER To convert the date into a readable format.
         return "User{" +
                 "id=" + id +
                 ", first_name = '" + first_name + '\'' +
