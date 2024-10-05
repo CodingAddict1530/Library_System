@@ -173,7 +173,7 @@ public class SearchPageController extends Controller implements Initializable {
 
             // Create an ImageView and style it.
             ImageView imageView = new ImageView();
-            addImageU(imageView, getClass(), "general", "man2.jpg");
+            addImageU(imageView, getClass(), "general", "book1.jpg");
             imageView.setFitWidth(101.0);
             imageView.setFitHeight(90.0);
             imageView.setPreserveRatio(true);

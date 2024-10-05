@@ -252,8 +252,8 @@ public class SettingsPageController extends Controller implements Initializable 
         });
 
         // Add images to the ImageViews
-        addImageU(settingsPageImage1, getClass(), "general", "man2.jpg");
-        addImageU(settingsPageImage2, getClass(), "general", "man2.jpg");
+        addImageU(settingsPageImage1, getClass(), "general", "book1.jpg");
+        addImageU(settingsPageImage2, getClass(), "general", "book2.jpg");
 
         // Adjust minimum widths of the boxes
         settingsPageBox1.setMinWidth(150.0);
