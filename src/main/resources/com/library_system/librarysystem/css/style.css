@@ -1,0 +1,63 @@
+/* @import url("http://fonts.googleapis.com/css?family=Montserrat"); */
+
+.root {
+    -fx-background-color: white;
+}
+
+* {
+    -fx-font-family: "Roboto Light";
+}
+
+#firstPageLoginBtn, #firstPageSignUpBtn, #loginPageLoginBtn, #signUpPageSignUpBtn {
+    -fx-background-color: #d2a7fa;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 12;
+    -fx-background-radius: 45;
+    -fx-border-radius: 45;
+}
+
+#loginPageEmail, #loginPagePassword, #signUpPageEmail, #signUpPageFirstName, #signUpPageLastName,
+#signUpPagePassword {
+    -fx-font-size: 12;
+    -fx-background-radius: 45;
+    -fx-border-radius: 45;
+}
+
+#signUpPageAnchorPane {
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+    -fx-border-width: 0.5;
+    -fx-border-radius: 15;
+}
+
+#homePageSideBar {
+    -fx-background-color: #d2a7fa;
+    -fx-background-radius: 20, 20, 0, 0;
+}
+
+.chart-plot-background {
+    -fx-background-color: white;
+}
+
+#homePageCircle1, #homePageCircle2, #homePageCircle3, #homePageCircle4, #homePageCircle5,
+#homePageCircle6, #homePageCircle7, #homePageCircle8, #homePageCircle9, #homePageCircle10,
+#homePageCircle11, #homePageCircle12, #homePageCircle13, #homePageCircle14, #homePageCircle15,
+#homePageCircle16, #homePageCircle17, #homePageCircle18, #homePageCircle19, #homePageCircle20,
+#homePageCircle21, #homePageCircle22, #homePageCircle23, #homePageCircle24, #homePageCircle25,
+#homePageCircle26, #homePageCircle27, #homePageCircle28, #homePageCircle29, #homePageCircle30,
+#homePageCircle31, #homePageCircle32, #homePageCircle33, #homePageCircle34, #homePageCircle35,
+#homePageCircle36, #homePageCircle37, #homePageCircle38, #homePageCircle39, #homePageCircle40,
+#homePageCircle41, #homePageCircle42 {
+    -fx-fill: white;
+}
+
+#homePageCircleLeft, #homePageCircleRight {
+    -fx-fill: #d2a7fa;
+}
+
+#homePageRemainder1, #homePageRemainder2, #homePageRemainder3, #homePageRemainder4,
+#homePageMute1, #homePageMute2, #homePageMute3, #homePageMute4 {
+    -fx-background-color: #d2a7fa;
+    -fx-background-radius: 45;
+    -fx-border-radius: 45;
+}

@@ -39,7 +39,7 @@ public class Application extends javafx.application.Application {
         Scene scene = new Scene(root, 1000, 600);
 
         // Add css to the scene
-        String css = Objects.requireNonNull(getClass().getResource("/css/index.css")).toExternalForm();
+        String css = Objects.requireNonNull(getClass().getResource("css/style.css")).toExternalForm();
         scene.getStylesheets().add(css);
 
         // Set up the stage with a title and logo, then add the scene to it.
