@@ -64,6 +64,7 @@ public class Application extends javafx.application.Application {
      * @param args input stream.
      */
     public static void main(String[] args) {
+
         launch(args);
     }
 
